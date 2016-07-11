@@ -1,0 +1,207 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Assignment 5, Part 1 - Practice DOM Scripting</title>
+
+<!--<script type="text/javascript"> // for problem #5
+//    document.addEventListener("DOMContentLoaded", init, false);
+//    function init() {
+//        myButton.addEventListener("click", writeMessage, false);
+//    }
+//    function writeMessage() {	
+//        alert("I have been clicked");
+//    }
+</script>-->
+
+<script type="text/javascript"> // for problems #6-10
+    var controlFlashing = -1;
+    document.addEventListener("DOMContentLoaded", init, false);
+    function init() {
+        btn1.addEventListener("click", disableBtn, false);
+        btn1.addEventListener("click", getValue, false);
+        btn2.addEventListener("click", openWindow, false); 
+        startBtn.addEventListener("click", startFlashingText, false);
+        stopBtn.addEventListener("click", stopFlashingText, false);
+        btnSelect.addEventListener("click", makeListSelection, false);
+    }
+    function disableBtn() {
+        document.getElementById("btn1").disabled = true;
+    }
+    function getValue() {
+        var val = 'none';
+        val = document.getElementById("search").value;
+        alert('The value the user input is: ' + val);
+    }
+    function openWindow() { 
+        window.open('newpage.html', 'newPage','width=300,height=300,resizable=yes');
+    } 
+    function flashingText() {
+         console.log('Learning JavaScript is fun!'); 
+    }
+    function stopFlashingText() {
+//        window.console.log('controlFlashing is: ' + controlFlashing);
+        clearInterval(controlFlashing);
+    }
+    function startFlashingText() {
+        controlFlashing = setInterval(function() { flashingText()}, 2000);
+    }
+    function makeListSelection () {
+//        window.console.log("I am here");
+        var x = document.getElementById("danceList").value;
+        document.getElementById("demo").innerHTML = x;
+        window.alert('Your favorite dance style is "' + x + '"');
+    }
+</script>
+</head>
+
+<body>
+    
+    <h1>Practice DOM Scripting Part 1</h1>
+<!--
+COMM644 
+Assignment 5
+
+
+
+Practice with Forms and the DOM Event Model (20 points)
+
+In this part of the assignment you will practice working with form objects and the DOM Event Model:
+-->
+
+
+<!--1.	Add a button to a web page. Use the old school HTML attribute method to attach a click event handler to the button. That handler should call a function that displays the message “I have been clicked” out into an alert box.-->
+
+<!--
+<h2>Old School HTML attribute method of handling events</h2>
+    <script>
+        function writeMessage() {
+            alert("I have been clicked");
+        }
+    </script>
+    
+    <button onclick="writeMessage()">Click Me</button>    
+-->
+
+
+<!--2.	Add a button to a web page and uniquely ID the button. Write a script that finds the button by its ID. Then use the DOM Element method to associate a function with the onclick event of the button. Again, display the message “I have been clicked” out into an alert box.-->
+<!--
+
+<h2>Element Properties method of handling events</h2>
+
+<button id="myButton">Click Me</button>
+
+<script>
+    var myElement = document.getElementById("myButton");
+    myElement.onclick = function() {
+        alert("I have been clicked");
+    }
+</script>
+-->
+
+
+<!--3.	Add a button to a web page and uniquely ID the button. Write a script that attaches an event listener to the button and listens for the click event. When it’s heard, a user-defined function should be called and the message “I have been clicked” should be displayed out into an alert box.-->
+<!--
+
+<h2>Event Listener method of handling events with a user defined function</h2>
+
+<button id="myButton">Click Me</button>
+<script>
+    myButton.addEventListener("click", writeMessage, false);
+    function writeMessage() {	
+        alert("I have been clicked");
+    }
+</script>
+-->
+
+
+<!--4.	Modify the code within step 3 so that the code that displays an alert box is written directly within a callback function as opposed to a user-defined function.-->
+<!--
+
+<h2>Event Listener method of handling events within a callback function</h2>
+
+<button id="myButton">Click Me</button>
+<script>
+    myButton.addEventListener("click", function writeMessage() {	
+        alert("I have been clicked");
+    }, false);
+    
+</script>
+-->
+
+
+<!--5.	Modify the code in step 4 so that you can write your script within the <head> tag of the page rather than underneath the button in the markup.-->
+
+<h2>5. Event Listener method of handling events within a callback function and with script in head tag</h2>
+
+<button id="myButton">Click Me</button>
+
+
+<!--6.	Add a link to your web page. Add the text “Visit Google” to the link, set the ID to “redirect” and set the href attribute to http://www.google.com. Now, write a script that alerts the user that they clicked on the link but prevents the browser from also redirecting to the Google site.-->
+
+<h2>6. Event Listener method of handling events - prevent link from going to Google's website</h2>
+<p><a href="http://www.google.com" id="redirect">Visit Google</a></p>
+<script>
+    var redirect = document.getElementById("redirect");
+    document.addEventListener("click", function(event) { 	
+        event.preventDefault();
+        event.stopPropagation(); 
+    }, false);
+    redirect.addEventListener("click", writeMessage2, false);
+    function writeMessage2() {	
+        alert("You clicked the link, but I'm preventing you from going to Google's website.");
+    }  
+</script>
+
+<!--7.	Add a text box and a button to a web page. Add an event listener to the button. When the click event is heard, the button should be disabled, and the text that the user input into the text box should be displayed within an alert box.-->
+
+<h2>7. Event Listener method of handling events - disable button and send form content to alert method</h2>
+    <form id="theform">
+        <input type="text" id="search" value="Enter some text...">
+    </form>
+    <br><br>
+    
+    <button id="btn1">Button 1</button>
+    
+
+<!--8.	Create a new page called newpage.html. You will now have 2 web pages including index.html and newpage.html. Add a button to index.html. When the button is clicked, newpage.html should appear as a popup window at 300 pixels wide by 300 pixels high. As soon as newpage.html loads however, resize the window to 500 pixels wide by 300 pixels high. You will need to handle the load event on newpage.html and use a BOM method on newpage.html to accomplish this task.
+-->
+<h2>8. Event Listener on button click to open new window that begins at 300 x 300 pixels, but upon load will be 500 x 300 pixels</h2>
+
+<button id="btn2">Button 2</button>
+
+
+<!--9.	Add two buttons to a web page. Add the text Start to one button and Stop to the other button. Using the BOM .setInterval() method, figure out a way to move display the text “Learning JavaScript is fun!” into the console window every 2 seconds but only when the Start button is clicked. If the user clicks on the Stop button, the console should stop logging the text immediately.
+-->
+
+<h2>9. Event Listener to Start and Stop displaying text in the console</h2>
+
+<p id="displayText">Learning JavaScript is fun!</p>
+<button id="startBtn">Start</button><button id="stopBtn">Stop</button>
+
+
+<!--10.	Add a drop down list to a web page. Populate the drop down list with 4 items. Add a button next to the drop down list and set the text to “Select”. When the user clicks the button, the item selected in the drop down list should appear within an alert box.
+-->
+
+<h2>10. Event Listener for triggered by button and supplies an alert on the droplist selection</h2>
+
+<p>What style of dance do you prefer?</p>
+<form id="danceForm" >
+    Favorite Style: 
+
+    <select form="danceForm" name="danceList" id="danceList">
+      <option value="Ballet">Ballet</option>
+      <option value="Ballet Folklorico">Ballet Folklorico</option>
+      <option value="Tap">Tap</option>
+      <option value="Jazz">Jazz</option>
+      <option value="Flamenco">Flamenco</option>
+    </select>
+    <input type="button" id="btnSelect" value="Select">
+</form>
+
+
+<!--<button id="btnSelect">Select</button>-->
+<p id="demo"></p> 
+
+</body>
+</html>
