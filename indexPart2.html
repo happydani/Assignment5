@@ -3,23 +3,61 @@
 <head>
 <meta charset="utf-8">
 <title>Assignment 5, Part 2 - Calculator</title>
-<script src="scriptAssignment5.js"></script>
+<!--<style type="text/css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  letter-spacing: 2px;
+}
+#calculator {
+  width: 400px;
+  margin: 50px auto 0 auto;
+}
+.result {
+  width: 285px;
+  height: 40px;
+  border: 1px solid grey;
+  float: left;
+  line-height: 40px;
+}
+.result > p {
+  /* margin-left: 10px; */
+}
+.clear, span {
+  height: 40px;
+  border: 1px solid grey;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+}
+.clear {
+  width: 95px;
+  float: left;
+}
+span {
+  float: left;
+  width: 95px;
+}
+</style>-->
+
+<script type="text/javascript" src="scriptAssignment5.js"></script>
 </head>
 
 <body>
     
-    <h1>My Calculator</h1>
-    
+  <h1>My Calculator</h1>
+
     <!--<form method='post' action=''>
         <label for='name'>Enter your username</label>
         <input type='text' id='name' />
         <div id= 'feedback'></div>
         <input type='submit' value='submit' />
     </form>-->
-	<input type="text" readonly id="result">
+	<input type="text" readonly id="result" />
     <br>
-    <input type="button" id="seven" value="7">
-    <input type="button" id="eight" value="8">
+    <input type="button" id="seven" value="7" />
+    <input type="button" id="eight" value="8" />
     <input type="button" id="nine" value="9">
     <input type="button" id="divide" value="/">
     <br>
@@ -37,5 +75,6 @@
     <input type="button" id="period" value=".">
     <input type="button" id="add" value="+">
     <input type="button" id="equal" value="=">
+    
 </body>
 </html>
