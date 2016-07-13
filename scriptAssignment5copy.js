@@ -9,36 +9,41 @@ document.addEventListener("DOMContentLoaded", init, false);
     
 //2.	Create the user-defined function called init().
 function init() {
-    var buttons = document.getElementsByTagName('input'); 
+    var buttons = document.getElementsByTagName('input');
+    
     var result = document.getElementById('result');
-       
+    
+//    var clear = document.getElementsByClassName('clear')[0];
+//    console.log(clear);
+    
 //3.	Within the init() function, attach an event listener to each of the 16 buttons in the web page. You will listen for the click event and when heard, a function called enter() should be called for each of the buttons except for the equal sign. Since you are attaching an event listener to an object, you can pass in this.value as a parameter to each of the enter() function calls. 
     
     for (var i=0; i < buttons.length; i++) {
         //4.	For the equal button, call a function called calculate(). You will not pass any arguments into this function.
         
         if (buttons[i].value === '=') {
-            buttons[i].addEventListener("click", calculate(), false);
+            buttons[i].addEventListener("click", calculate(i), false);
         }
         else {
             buttons[i].addEventListener("click", enter(buttons[i]), false);
         }
+        //window.console.log(buttons);
     }
 }
 
 //5.	Create a user-defined function called enter() that accepts val as an argument.
 
-function enter(val) {
+function enter(btn_i) {
     
     //6.	Within the enter() function get the result text box by its ID and set its value plus equal to the val parameter being passed in.
     return function () {
       
-      if (val.value === '÷') {
+      if (btn_i.value === '÷') {
          result.value  += '/';
-      } else if (val.value === 'x') {
+      } else if (btn_i.value === 'x') {
          result.value  += '*';
       } else {
-         result.value  += val.value; 
+         result.value  += btn_i.value; 
       }
     };
 } 
@@ -46,7 +51,7 @@ function enter(val) {
 
 //7.	Create a user-defined function called calculate() that doesn’t accept any arguments. 
 
-function calculate(){  
+function calculate(i){  
     return function () {
         
         //8.	Within the calculate() function get the result text box by its ID and set its value equal to the calculation currently stored in the result text box. HINT: Use the built-in eval() function to perform the heavy lifting for you.
